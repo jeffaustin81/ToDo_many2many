@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>To Do List</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <style>
+        .due{
+            color : red;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>List of All Tasks:</h1>
+            {% if categories is not empty %}
+                <ul>
+                    {% for category in categories %}
+                        <li><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></li>
+                        {% set id = category.getID %}
+                        {% for task in tasks %}
+                                <ul>
+                                {% if task.getCategoryId == id %}
+                                    <p>{{ task.getDescription }}</p>
+                                    <ul><li class="due">{{ task.getDueDate }}</li></ul>
+                                {% endif %}
+                            </ul>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h3>You have no tasks!</h3>
+            {% endif %}
+
+            <p><a class="btn btn-primary" href='/'>Home</a></p>
+        </div>
+    </body>
+</html>
