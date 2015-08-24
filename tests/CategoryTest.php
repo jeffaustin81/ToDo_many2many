@@ -22,7 +22,7 @@
             Category::deleteAll();
         }
 
-        function test_getName()
+        function test_category_getName()
         {
             //Arrange
             $name = "Work stuff";
@@ -35,7 +35,21 @@
             $this->assertEquals($name, $result);
         }
 
-        function test_getId()
+        function test_category_SetName()
+        {
+            //Arrange
+            $name = "Kitchen chores";
+            $test_category = new Category($name);
+
+            //Act
+            $test_category->setName("Home chores");
+            $result = $test_category->getName();
+
+            //Assert
+            $this->assertEquals("Home chores", $result);
+        }
+
+        function test_category_getId()
         {
             //Arrange
             $name = "Work stuff";
@@ -46,10 +60,10 @@
             $result = $test_Category->getId();
 
             //Assert
-            $this->assertEquals(true, is_numeric($result));
+            $this->assertEquals(1, $result);
         }
 
-        function test_save()
+        function test_category_save()
         {
             //Arrange
             $name = "Work stuff";
@@ -63,7 +77,24 @@
             $this->assertEquals($test_Category, $result[0]);
         }
 
-        function test_getAll()
+        function testUpdate()
+        {
+            //Arrange
+            $name = "Work stuff";
+            $id = 1;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $new_name = "Home stuff";
+
+            //Act
+            $test_category->update($new_name);
+
+            //Assert
+            $this->assertEquals("Home stuff", $test_category->getName());
+        }
+
+        function test_category_getAll()
         {
             //Arrange
             $name = "Work stuff";
@@ -80,7 +111,7 @@
             $this->assertEquals([$test_Category, $test_Category2], $result);
         }
 
-        function test_deleteAll()
+        function test_category_deleteAll()
         {
             //Arrange
             $name = "Wash the dog";
