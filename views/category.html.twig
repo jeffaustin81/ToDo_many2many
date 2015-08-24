@@ -38,9 +38,10 @@
 
             <p><a href="/categories/{{ category.getId }}/edit">Edit this category</a></p>
 
-            <form action='/delete_tasks' method='post'>
+            <form action='/delete_category/{id}' method='post'>
+                <input name="_method" type="hidden" value="delete">
                 <input id="category_id" name="category_id" type="hidden" value="{{ category.getId }}">
-                <button type='submit' class="btn btn-danger">Clear Tasks</button>
+                <button type='submit' class="btn btn-danger">Clear Category</button>
             </form>
 
 
