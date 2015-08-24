@@ -9,6 +9,7 @@
         <ul>
             {% for task in tasks %}
                 <li><a href="/tasks/{{ task.getId }}">{{ task.getDescription }}</a></li>
+                <ul><li class="due">{{ task.getDueDate }}</li></ul>
             {% endfor %}
         </ul>
     {% endif %}

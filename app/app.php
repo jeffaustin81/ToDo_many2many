@@ -94,6 +94,21 @@
         return $app['twig']->render('category.html.twig', array('category' => $category, 'categories' => Category::getAll(), 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
     });
 
+    $app->get("/task/{id}/edit", function($id) use ($app) {
+        $task = Task::find($id);
+        return $app['twig']->render('task_edit.html.twig', array('task' => $task, 'categories' => $task->getCategories(), 'all_categories' => Category::getAll()));
+    });
+
+    $app->patch("/editTask_confirm/{id}", function($id) use ($app) {
+        $description = $_POST['description'];
+        $id = $_POST['task_id'];
+        $due_date = $_POST['due_date'];
+        $task = Task::find($id);
+        $task->update($description, $id, $due_date);
+
+        return $app['twig']->render('task.html.twig', array('task' => $task, 'categories' => $task->getCategories(), 'all_categories' => Category::getAll()));
+    });
+
     $app->delete("/delete_category/{id}", function($id) use ($app) {
         $id = $_POST['category_id'];
         $category = Category::find($id);
@@ -101,17 +116,25 @@
         return $app['twig']->render('categories.html.twig', array('categories' => Category::getAll()));
     });
 
+    $app->delete("/delete_task/{id}", function($id) use ($app) {
+        $id = $_POST['task_id'];
+        $task = Task::find($id);
+        $task->delete();
+        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
+    });
+
     $app->post("/delete_categories", function() use ($app) {
-        Task::deleteAll();
+
         Category::deleteAll();
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });
-    //
-    // $app->post("/delete_tasks", function() use ($app) {
-    //     $category_id = $_POST['category_id'];
-    //     Task::delete($category_id);
-    //     return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
-    // });
+
+    $app->post("/delete_tasks", function() use ($app) {
+
+        Task::deleteAll();
+        return $app['twig']->render('index.html.twig', array('tasks' => Task::getAll()));
+    });
+
     //
     // $app->get("/all_tasks", function() use ($app) {
     //     return $app['twig']->render('all_tasks.html.twig', array('tasks' => Task::getAll(), 'categories' => Category::getAll()));

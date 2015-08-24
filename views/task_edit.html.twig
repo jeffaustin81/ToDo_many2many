@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>To Do List</title>
+</head>
+<body>
+    <h1>Edit ???{{ task.getDescription }}</h1>
+    <ul><li class="due">{{ task.getDueDate }}</li></ul>
+
+    <form action="/editTask_confirm/{id}" method="post">
+        <input name="_method" type="hidden" value="patch">
+        <input id="task_id" name="task_id" type="hidden" value="{{ task.getId }}">
+        <label for='description'>Task Description</label>
+        <input id='description' name='description' type='text'>
+        <label for='due_date'>Due Date</label>
+        <input id='due_date' name='due_date' type='date'>
+
+        <button type="submit">Edit task</button>
+    </form>
+
+
+    <p><a href="/">Home</a></p>
+</body>
+</html>
