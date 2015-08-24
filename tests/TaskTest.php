@@ -37,6 +37,20 @@
             $this->assertEquals($description, $result);
         }
 
+        function test_task_setDescription()
+        {
+            //Arrange
+            $description = "Wash the dog";
+            $test_task = new Task($description);
+
+            //Act
+            $test_task->setDescription("Feed dog");
+            $result = $test_task->getDescription();
+
+            //Assert
+            $this->assertEquals("Feed dog", $result);
+        }
+
         // function test_getAll()
         // {
         //     //Arrange
@@ -59,7 +73,7 @@
         //     //Assert
         //     $this->assertEquals([$test_task, $test_task2], $result);
         // }
-        //
+
         // function test_deleteAll()
         // {
         //     //Arrange
