@@ -25,17 +25,21 @@
             <h4>Add a task</h4>
 
             <form action='/tasks' method='post'>
-                <input id="category_id" name="category_id" type="hidden" value="{{ category.getId() }}">
-                <label for='description'>Task Description</label>
-                <input id='description' name='description' type='text'>
-                <label for='due_date'>Due Date</label>
-                <input id='due_date' name='due_date' type='date'>
+                <input id="category_id" name="category_id" type="hidden" value="{{ category.getId }}">
+                <label for="task_id">Select a task</label>
+                <select id='task_id' name='task_id' type='text'>
+                    {% for task in all_tasks %}
+                        <option value="{{ task.getId }}"> {{ task.getDescription }} </option>
+                    {% endfor %}
+                </select>
 
                 <button type='submit' class="btn btn-success">Add task</button>
             </form>
 
+            <p><a href="/categories/{{ category.getId }}/edit">Edit this category</a></p>
+
             <form action='/delete_tasks' method='post'>
-                <input id="category_id" name="category_id" type="hidden" value="{{ category.getId() }}">
+                <input id="category_id" name="category_id" type="hidden" value="{{ category.getId }}">
                 <button type='submit' class="btn btn-danger">Clear Tasks</button>
             </form>
 

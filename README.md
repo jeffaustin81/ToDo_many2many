@@ -1,10 +1,12 @@
 # _A To Do_
 
-#### _A To Do app built to work with mySQL database, 8/18/2015_
+#### _A To Do app built to work with "many to many" mySQL database, 8/18/2015_
 
-#### By _**Charles Moss & Tim White & Casey Heitz**_
+#### By _**Charles Moss & Tim White & Casey Heitz & Jeff Austin**_
 
 ## Description
+
+
 An input field accepts a "category" and adds it to a list. User can select the category and add a task with a due date. A list of all tasks in that category will be sorted and displayed by due date. User may delete all task within a category or all category (with containing tasks). User may also view an "all tasks" page ordered by category then due date.  
 
 ## Setup
@@ -18,6 +20,25 @@ $ composer install
 
 _You then only need to start up a local PHP server from within the "web" directory within the project's folder and point your browser to whatever local host server you have created._
 
+## Database Setup
+
+```
+-> CREATE DATABASE to_do;
+
+-> USE to_do;
+
+
+????
+-> CREATE TABLE stylists (id serial PRIMARY KEY, name varchar (255));
+
+-> CREATE TABLE clients (id serial PRIMARY KEY, name varchar (255), stylist_id int, appointment date);
+???
+
+```
+
+To produce the "hair_salon_test" database, make a copy via myPHPadmin by selecting "hair_salon" and clicking the "Operations" tab. You will see a "copy database to:" section, fill the input with "hair_salon_test", select "Structure only", and click "Go".
+
+
 ## Technologies Used
 _This project makes use of PHP, mySQL, the testing framework [PHPUnit](https://phpunit.de/), the micro-framework [Silex](http://silex.sensiolabs.org/), and uses [Twig](http://twig.sensiolabs.org/) templates._
 
@@ -25,7 +46,7 @@ _This project makes use of PHP, mySQL, the testing framework [PHPUnit](https://p
 
 ### Legal
 
-Copyright (c) 2015 Charles A Moss & Tim White & Casey Heitz
+Copyright (c) 2015 Charles A Moss & Tim White & Casey Heitz & Jeff Austin
 
 This software is licensed under the MIT license.
 

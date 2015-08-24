@@ -5,35 +5,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to To Do List</h1>
 
-        <h4>Create a new category:</h4>
+    <h1>Welcome to To Do List</h1>
 
-        <form action="/categories" method="post">
-            <div class="form-group">
-                <input id="name" name="name" class="form-control" type="text" placeholder="Category Name">
-            </div>
-            <button type="submit" class="btn btn-success">Add category</button>
-        </form>
+        <h3><a href="/categories">Add or view a category</a></h3>
+        <h3><a href="/tasks">Add or view a task</a></h3>
 
-        {% if categories is not empty %}
-            <p>List of all categories:</p>
-            <ul>
-                {% for category in categories %}
-                    <li><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>There are no categories yet!</p>
-        {% endif %}
-
-        <form action="/all_tasks">
-            <button type="submit" class="btn btn-info">List All Tasks</button>
-        </form>
-
-        <form action="/delete_categories" method="post">
-            <button type="submit" class="btn btn-danger">Clear Categories</button>
-        </form>
     </div>
 </body>
 </html>

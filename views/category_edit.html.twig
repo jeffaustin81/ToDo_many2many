@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>To Do List</title>
+</head>
+<body>
+    <h1>{{ category.getName }}</h1>
+
+    <form action="/edit_confirm/{id}" method="post">
+        <input name="_method" type="hidden" value="patch">
+        <input id="category_id" name="category_id" type="hidden" value="{{ category.getId }}">
+        <label for="name">Category name</label>
+        <input id="name" name="name" type="text">
+
+        <button type="submit">Edit category</button>
+    </form>
+
+
+    <p><a href="/">Home</a></p>
+</body>
+</html>
