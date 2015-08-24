@@ -138,26 +138,6 @@
             $this->assertEquals([], $result);
         }
 
-        // // function test_getCategoryId()
-        // // {
-        // //     //Arrange
-        // //     $name = "Home stuff";
-        // //     $id = null;
-        // //     $test_category = new Category($name, $id);
-        // //     $test_category->save();
-        // //
-        // //     $description = "Wash the dog";
-        // //
-        // //     $test_task = new Task($description, $id);
-        // //     $test_task->save();
-        // //
-        // //     //Act
-        // //     $result = $test_task->getCategoryId();
-        // //
-        // //     //Assert
-        // //     $this->assertEquals(true, is_numeric($result));
-        // // }
-        //
         function test_find()
         {
             //Arrange
@@ -175,6 +155,48 @@
 
             //Assert
             $this->assertEquals($test_task, $result);
+        }
+
+        function testUpdate()
+        {
+            //Arrange
+            $description = "Wash the dog";
+            $id = 1;
+            $due_date = "2015-11-11";
+            $test_task = new Task($description, $id, $due_date);
+            $test_task->save();
+
+            $new_description = "Clean the dog";
+            $new_due_date = "2015-10-10";
+
+            //Act
+
+            $test_task->update($new_description, $new_due_date);
+
+            //Assert
+            $this->assertEquals("Clean the dog", $test_task->getDescription());
+            $this->assertEquals("2015-10-10", $test_task->getDueDate());
+        }
+
+        function testDeleteTask()
+        {
+            //Arrange
+            $description = "Wash the dog";
+            $id = 1;
+            $test_task = new Task($description, $id);
+            $test_task->save();
+
+            $description2 = "Water the lawn";
+            $id2 = 2;
+            $test_task2 = new Task($description2, $id2);
+            $test_task2->save();
+
+
+            //Act
+            $test_task->delete();
+
+            //Assert
+            $this->assertEquals([$test_task2], Task::getAll());
         }
     }
 ?>

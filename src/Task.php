@@ -41,6 +41,11 @@ class Task
 
     }
 
+    function setDueDate($new_due_date)
+    {
+        $this->due_date = $new_due_date;
+    }
+
     function save()
     {
 
@@ -49,14 +54,19 @@ class Task
 
     }
 
-    // static function deleteTasks($category_id)
-    // {
-    //     $tasks = Task::getAll();
-    //     foreach($tasks as $task)
-    //     {
-    //         $GLOBALS['DB']->exec("DELETE FROM tasks WHERE category_id=$category_id;");
-    //     }
-    // }
+    function delete()
+    {
+
+        $GLOBALS['DB']->exec("DELETE FROM tasks WHERE id = {$this->getId()};");
+
+    }
+
+    function update($new_description, $new_due_date)
+        {
+            $GLOBALS['DB']->exec("UPDATE tasks SET description = '{$new_description}', '{$new_due_date}' WHERE id =  {$this->getId()};");
+            $this->setDescription($new_description);
+            $this->setDueDate($new_due_date);
+        }
 
     static function find($search_id)
     {
