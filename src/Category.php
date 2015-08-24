@@ -37,19 +37,9 @@
             $this->setName($new_name);
         }
 
-        function getTasks()
+        function delete()
         {
-            $tasks = array();
-            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE category_id = {$this->getId()} ORDER BY due_date;");
-            foreach($returned_tasks as $task) {
-                $description = $task['description'];
-                $id = $task['id'];
-                $category_id = $task['category_id'];
-                $due_date = $task['due_date'];
-                $new_task = new Task($description, $id, $category_id, $due_date);
-                array_push($tasks, $new_task);
-            }
-            return $tasks;
+            $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
         }
 
         static function getAll()
