@@ -144,53 +144,50 @@
 
             //Act
             Category::deleteAll();
-            $result = Category::getAll();
 
             //Assert
+            $result = Category::getAll();
             $this->assertEquals([], $result);
         }
 
-        // function test_find()
-        // {
-        //     //Arrange
-        //     $name = "Wash the dog";
-        //     $name2 = "Home stuff";
-        //     $test_Category = new Category($name);
-        //     $test_Category->save();
-        //     $test_Category2 = new Category($name2);
-        //     $test_Category2->save();
-        //
-        //     //Act
-        //     $result = Category::find($test_Category->getId());
-        //
-        //     //Assert
-        //     $this->assertEquals($test_Category, $result);
-        // }
+        function test_find()
+        {
+            //Arrange
+            $name = "Wash the dog";
+            $name2 = "Home stuff";
+            $test_Category = new Category($name);
+            $test_Category->save();
+            $test_Category2 = new Category($name2);
+            $test_Category2->save();
 
-        // function test_getTasks()
-        // {
-        //     //Arrange
-        //     $name = "Work stuff";
-        //     $id = null;
-        //     $test_category = new Category($name, $id);
-        //     $test_category->save();
-        //
-        //     $test_category_id = $test_category->getId();
-        //
-        //     $description = "Email client";
-        //     $test_task = new Task($description, $id, $test_category_id);
-        //     $test_task->save();
-        //
-        //     $description2 = "Meet with boss";
-        //     $test_task2 = new Task($description2, $id, $test_category_id);
-        //     $test_task2->save();
-        //
-        //     //Act
-        //     $result = $test_category->getTasks();
-        //
-        //     //Assert
-        //     $this->assertEquals([$test_task, $test_task2], $result);
-        // }
+            //Act
+            $result = Category::find($test_Category->getId());
+
+            //Assert
+            $this->assertEquals($test_Category, $result);
+        }
+
+        function testAddTask()
+        {
+            //Arrange
+            $name = "Work stuff";
+            $id = 1;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $description = "File reports";
+            $id2 = 2;
+            $due_date = "2015-10-10";
+            $test_task = new Task($description, $id2, $due_date);
+            $test_task->save();
+
+            //Act
+            $test_category->addTask($test_task);
+
+            //Assert
+            $this->assertEquals($test_category->getTasks(), [$test_task]);
+        }
+
     }
 
 ?>
